@@ -3,7 +3,6 @@
 namespace FineDiffTests\Render\Text;
 
 use PHPUnit\Framework\TestCase;
-use Mockery as m;
 use cogpowered\FineDiff\Render\Text;
 
 class ProcessTest extends TestCase
@@ -11,11 +10,6 @@ class ProcessTest extends TestCase
     public function setUp(): void
     {
         $this->text = new Text;
-    }
-
-    public function tearDown(): void
-    {
-        m::close();
     }
 
     public function testInvalidOpcode()
@@ -33,8 +27,8 @@ class ProcessTest extends TestCase
 
     public function testProcess()
     {
-        $opcodes = m::mock('cogpowered\FineDiff\Parser\Opcodes');
-        $opcodes->shouldReceive('generate')->andReturn('c5i:2c6d')->once();
+        $opcodes = $this->createMock(\cogpowered\FineDiff\Parser\Opcodes::class);
+        $opcodes->expects($this->once())->method('generate')->willReturn('c5i:2c6d');
 
         $html = $this->text->process('Hello worlds', $opcodes);
 

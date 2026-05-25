@@ -3,16 +3,10 @@
 namespace FineDiffTests\Parser;
 
 use PHPUnit\Framework\TestCase;
-use Mockery as m;
 use cogpowered\FineDiff\Parser\Opcodes;
 
 class OpcodesTest extends TestCase
 {
-    public function tearDown(): void
-    {
-        m::close();
-    }
-
     public function testInstanceOf()
     {
         $this->assertTrue(is_a(new Opcodes, 'cogpowered\FineDiff\Parser\OpcodesInterface'));
@@ -26,8 +20,8 @@ class OpcodesTest extends TestCase
 
     public function testSetOpcodes()
     {
-        $operation = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
-        $operation->shouldReceive('getOpcode')->once()->andReturn('testing');
+        $operation = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation->expects($this->once())->method('getOpcode')->willReturn('testing');
 
         $opcodes = new Opcodes;
         $opcodes->setOpcodes(array($operation));
@@ -45,11 +39,11 @@ class OpcodesTest extends TestCase
 
     public function testGetOpcodes()
     {
-        $operation_one = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
-        $operation_one->shouldReceive('getOpcode')->andReturn('c5i');
+        $operation_one = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_one->method('getOpcode')->willReturn('c5i');
 
-        $operation_two = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
-        $operation_two->shouldReceive('getOpcode')->andReturn('2c6d');
+        $operation_two = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_two->method('getOpcode')->willReturn('2c6d');
 
         $opcodes = new Opcodes;
         $opcodes->setOpcodes(array($operation_one, $operation_two));
@@ -63,11 +57,11 @@ class OpcodesTest extends TestCase
 
     public function testGenerate()
     {
-        $operation_one = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
-        $operation_one->shouldReceive('getOpcode')->andReturn('c5i');
+        $operation_one = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_one->method('getOpcode')->willReturn('c5i');
 
-        $operation_two = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
-        $operation_two->shouldReceive('getOpcode')->andReturn('2c6d');
+        $operation_two = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_two->method('getOpcode')->willReturn('2c6d');
 
         $opcodes = new Opcodes;
         $opcodes->setOpcodes(array($operation_one, $operation_two));
@@ -77,11 +71,11 @@ class OpcodesTest extends TestCase
 
     public function testToString()
     {
-        $operation_one = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
-        $operation_one->shouldReceive('getOpcode')->andReturn('c5i');
+        $operation_one = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_one->method('getOpcode')->willReturn('c5i');
 
-        $operation_two = m::mock('cogpowered\FineDiff\Parser\Operations\Copy');
-        $operation_two->shouldReceive('getOpcode')->andReturn('2c6d');
+        $operation_two = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_two->method('getOpcode')->willReturn('2c6d');
 
         $opcodes = new Opcodes;
         $opcodes->setOpcodes(array($operation_one, $operation_two));

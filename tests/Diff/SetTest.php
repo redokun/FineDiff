@@ -3,7 +3,6 @@
 namespace FineDiffTests\Diff;
 
 use PHPUnit\Framework\TestCase;
-use Mockery as m;
 use cogpowered\FineDiff\Diff;
 
 class SetTest extends TestCase
@@ -13,52 +12,45 @@ class SetTest extends TestCase
         $this->diff = new Diff;
     }
 
-    public function tearDown(): void
-    {
-        m::close();
-    }
-
     public function testSetParser()
     {
-        $this->assertFalse( method_exists($this->diff->getParser(), 'fooBar') );
+        $this->assertFalse(method_exists($this->diff->getParser(), 'fooBar'));
 
-        $parser = m::mock('cogpowered\FineDiff\Parser\Parser');
-        $parser->shouldReceive('fooBar')->once();
+        $parser = $this->getMockBuilder(\cogpowered\FineDiff\Parser\Parser::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $this->diff->setParser($parser);
-        $parser = $this->diff->getParser();
 
-        $parser->fooBar();
+        $this->assertSame($parser, $this->diff->getParser());
     }
 
     public function testSetRenderer()
     {
-        $this->assertFalse( method_exists($this->diff->getRenderer(), 'fooBar') );
+        $this->assertFalse(method_exists($this->diff->getRenderer(), 'fooBar'));
 
-        $html = m::mock('cogpowered\FineDiff\Render\Html');
-        $html->shouldReceive('fooBar')->once();
+        $html = $this->createMock(\cogpowered\FineDiff\Render\Html::class);
 
         $this->diff->setRenderer($html);
-        $html = $this->diff->getRenderer();
 
-        $html->fooBar();
+        $this->assertSame($html, $this->diff->getRenderer());
     }
 
     public function testSetGranularity()
     {
-        $this->assertFalse( method_exists($this->diff->getGranularity(), 'fooBar') );
+        $this->assertFalse(method_exists($this->diff->getGranularity(), 'fooBar'));
 
-        $granularity = m::mock('cogpowered\FineDiff\Granularity\Word');
-        $granularity->shouldReceive('fooBar')->once();
+        $granularity = $this->createMock(\cogpowered\FineDiff\Granularity\Word::class);
 
-        $parser = m::mock('cogpowered\FineDiff\Parser\Parser');
-        $parser->shouldReceive('setGranularity')->with($granularity)->once();
-        $parser->shouldReceive('getGranularity')->andReturn($granularity)->once();
+        $parser = $this->getMockBuilder(\cogpowered\FineDiff\Parser\Parser::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $parser->expects($this->once())->method('setGranularity')->with($granularity);
+        $parser->expects($this->once())->method('getGranularity')->willReturn($granularity);
 
         $this->diff->setParser($parser);
         $this->diff->setGranularity($granularity);
 
-        $granularity = $this->diff->getGranularity();
-        $granularity->fooBar();
+        $this->assertSame($granularity, $this->diff->getGranularity());
     }
 }

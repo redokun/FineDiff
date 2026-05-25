@@ -3,7 +3,6 @@
 namespace FineDiffTests\Parser;
 
 use PHPUnit\Framework\TestCase;
-use Mockery as m;
 use cogpowered\FineDiff\Granularity\Character;
 use cogpowered\FineDiff\Parser\Parser;
 
@@ -13,11 +12,6 @@ class ParserTest extends TestCase
     {
         $granularity  = new Character;
         $this->parser = new Parser($granularity);
-    }
-
-    public function tearDown(): void
-    {
-        m::close();
     }
 
     public function testInstanceOf()
@@ -33,19 +27,17 @@ class ParserTest extends TestCase
 
     public function testSetOpcodes()
     {
-        $opcodes = m::mock('cogpowered\FineDiff\Parser\Opcodes');
-        $opcodes->shouldReceive('foo')->andReturn('bar');
+        $opcodes = $this->createMock(\cogpowered\FineDiff\Parser\Opcodes::class);
         $this->parser->setOpcodes($opcodes);
 
-        $opcodes = $this->parser->getOpcodes();
-        $this->assertEquals($opcodes->foo(), 'bar');
+        $this->assertSame($opcodes, $this->parser->getOpcodes());
     }
 
     public function testParseBadGranularity()
     {
         $this->expectException(\cogpowered\FineDiff\Exceptions\GranularityCountException::class);
-        $granularity = m::mock('cogpowered\FineDiff\Granularity\Character');
-        $granularity->shouldReceive('count')->andReturn(0);
+        $granularity = $this->createMock(\cogpowered\FineDiff\Granularity\Character::class);
+        $granularity->method('count')->willReturn(0);
         $parser = new Parser($granularity);
 
         $parser->parse('hello world', 'hello2 worl');
@@ -53,11 +45,10 @@ class ParserTest extends TestCase
 
     public function testParseSetOpcodes()
     {
-        $opcodes = m::mock('cogpowered\FineDiff\Parser\Opcodes');
-        $opcodes->shouldReceive('setOpcodes')->once();
+        $opcodes = $this->createMock(\cogpowered\FineDiff\Parser\Opcodes::class);
+        $opcodes->expects($this->once())->method('setOpcodes');
         $this->parser->setOpcodes($opcodes);
 
         $this->parser->parse('Hello worlds', 'Hello2 world');
-        $this->addToAssertionCount(1);
     }
 }
