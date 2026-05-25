@@ -8,12 +8,14 @@ use cogpowered\FineDiff\Granularity\Character;
 
 class CharacterTest extends TestCase
 {
-    protected $delimiters = array(
+    protected Character $character;
+
+    protected array $delimiters = [
         Delimiters::PARAGRAPH,
         Delimiters::SENTENCE,
         Delimiters::WORD,
         Delimiters::CHARACTER,
-    );
+    ];
 
     public function setUp(): void
     {
@@ -22,34 +24,33 @@ class CharacterTest extends TestCase
 
     public function testExtendsAndImplements()
     {
-        $this->assertTrue(is_a($this->character, 'cogpowered\FineDiff\Granularity\Granularity'));
-        $this->assertTrue(is_a($this->character, 'cogpowered\FineDiff\Granularity\GranularityInterface'));
-        $this->assertTrue(is_a($this->character, 'ArrayAccess'));
-        $this->assertTrue(is_a($this->character, 'Countable'));
+        $this->assertInstanceOf(\cogpowered\FineDiff\Granularity\Granularity::class, $this->character);
+        $this->assertInstanceOf(\cogpowered\FineDiff\Granularity\GranularityInterface::class, $this->character);
+        $this->assertInstanceOf(\ArrayAccess::class, $this->character);
+        $this->assertInstanceOf(\Countable::class, $this->character);
     }
 
     public function testGetDelimiters()
     {
-        $this->assertEquals($this->character->getDelimiters(), $this->delimiters);
+        $this->assertEquals($this->delimiters, $this->character->getDelimiters());
     }
 
     public function testSetDelimiters()
     {
         $arr = array('one', 'two');
         $this->character->setDelimiters($arr);
-        $this->assertEquals($this->character->getDelimiters(), $arr);
+        $this->assertEquals($arr, $this->character->getDelimiters());
     }
 
     public function testCountable()
     {
-        $this->assertEquals(count($this->character), count($this->delimiters));
+        $this->assertCount(count($this->delimiters), $this->character);
     }
 
     public function testArrayAccess()
     {
         // Exists
         for ($i = 0; $i < count($this->delimiters) + 1; $i++) {
-
             if ($i !== count($this->delimiters)) {
                 $this->assertTrue(isset($this->character[$i]));
             } else {
@@ -59,9 +60,8 @@ class CharacterTest extends TestCase
 
         // Get
         for ($i = 0; $i < count($this->delimiters) + 1; $i++) {
-
             if ($i !== count($this->delimiters)) {
-                $this->assertEquals($this->character[$i], $this->delimiters[$i]);
+                $this->assertEquals($this->delimiters[$i], $this->character[$i]);
             } else {
                 $this->assertNull($this->character[$i]);
             }
@@ -69,17 +69,15 @@ class CharacterTest extends TestCase
 
         // Set
         for ($i = 0; $i < count($this->delimiters) + 1; $i++) {
-
             $rand = rand(0, 1000);
-
             $this->character[$i] = $rand;
-            $this->assertEquals($this->character[$i], $rand);
+            $this->assertEquals($rand, $this->character[$i]);
         }
 
-        $this->assertEquals(count($this->character), count($this->delimiters) + 1);
+        $this->assertCount(count($this->delimiters) + 1, $this->character);
 
         // Unset
-        unset($this->character[ count($this->delimiters) ]);
-        $this->assertEquals(count($this->character), count($this->delimiters));
+        unset($this->character[count($this->delimiters)]);
+        $this->assertCount(count($this->delimiters), $this->character);
     }
 }

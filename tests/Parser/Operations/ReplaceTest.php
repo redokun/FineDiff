@@ -9,49 +9,48 @@ class ReplaceTest extends TestCase
 {
     public function testImplementsOperationInterface()
     {
-        $replace = new Replace('hello', 'world');
-        $this->assertTrue(is_a($replace, 'cogpowered\FineDiff\Parser\Operations\OperationInterface'));
+        $this->assertInstanceOf(\cogpowered\FineDiff\Parser\Operations\OperationInterface::class, new Replace('hello', 'world'));
     }
 
     public function testGetFromLen()
     {
         $replace = new Replace('hello', 'world');
-        $this->assertEquals($replace->getFromLen(), 'hello');
+        $this->assertEquals('hello', $replace->getFromLen());
     }
 
     public function testGetToLen()
     {
         $replace = new Replace('hello', 'world');
-        $this->assertEquals($replace->getToLen(), 5);
+        $this->assertEquals(5, $replace->getToLen());
     }
 
     public function testGetText()
     {
         $replace = new Replace('foo', 'bar');
-        $this->assertEquals($replace->getText(), 'bar');
+        $this->assertEquals('bar', $replace->getText());
     }
 
     public function testGetOpcodeSingleTextChar()
     {
         $replace = new Replace(1, 'c');
-        $this->assertEquals($replace->getOpcode(), 'di:c');
+        $this->assertEquals('di:c', $replace->getOpcode());
 
         $replace = new Replace('r', 'c');
-        $this->assertEquals($replace->getOpcode(), 'dri:c');
+        $this->assertEquals('dri:c', $replace->getOpcode());
 
         $replace = new Replace('rob', 'c');
-        $this->assertEquals($replace->getOpcode(), 'drobi:c');
+        $this->assertEquals('drobi:c', $replace->getOpcode());
     }
 
     public function testGetOpcodeLongerTextString()
     {
         $replace = new Replace(1, 'crowe');
-        $this->assertEquals($replace->getOpcode(), 'di5:crowe');
+        $this->assertEquals('di5:crowe', $replace->getOpcode());
 
         $replace = new Replace('r', 'crowe');
-        $this->assertEquals($replace->getOpcode(), 'dri5:crowe');
+        $this->assertEquals('dri5:crowe', $replace->getOpcode());
 
         $replace = new Replace('rob', 'crowe');
-        $this->assertEquals($replace->getOpcode(), 'drobi5:crowe');
+        $this->assertEquals('drobi5:crowe', $replace->getOpcode());
     }
 }

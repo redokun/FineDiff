@@ -9,34 +9,33 @@ class InsertTest extends TestCase
 {
     public function testImplementsOperationInterface()
     {
-        $replace = new Insert('hello world');
-        $this->assertTrue(is_a($replace, 'cogpowered\FineDiff\Parser\Operations\OperationInterface'));
+        $this->assertInstanceOf(\cogpowered\FineDiff\Parser\Operations\OperationInterface::class, new Insert('hello world'));
     }
 
     public function testGetFromLen()
     {
         $insert = new Insert('hello world');
-        $this->assertEquals($insert->getFromLen(), 0);
+        $this->assertEquals(0, $insert->getFromLen());
     }
 
     public function testGetToLen()
     {
         $insert = new Insert('hello world');
-        $this->assertEquals($insert->getToLen(), 11);
+        $this->assertEquals(11, $insert->getToLen());
     }
 
     public function testGetText()
     {
         $insert = new Insert('foobar');
-        $this->assertEquals($insert->getText(), 'foobar');
+        $this->assertEquals('foobar', $insert->getText());
     }
 
     public function testGetOpcode()
     {
         $insert = new Insert('C');
-        $this->assertEquals($insert->getOpcode(), 'i:C');
+        $this->assertEquals('i:C', $insert->getOpcode());
 
         $insert = new Insert('blue');
-        $this->assertEquals($insert->getOpcode(), 'i4:blue');
+        $this->assertEquals('i4:blue', $insert->getOpcode());
     }
 }

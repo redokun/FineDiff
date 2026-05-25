@@ -7,6 +7,8 @@ use cogpowered\FineDiff\Diff;
 
 class SetTest extends TestCase
 {
+    protected Diff $diff;
+
     public function setUp(): void
     {
         $this->diff = new Diff;

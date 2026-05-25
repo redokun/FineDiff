@@ -9,21 +9,21 @@ class ConstantsTest extends TestCase
 {
     public function testParagraphConstant()
     {
-        $this->assertEquals(Delimiters::PARAGRAPH, "\n\r");
+        $this->assertEquals("\n\r", Delimiters::PARAGRAPH);
     }
 
     public function testSentenceConstant()
     {
-        $this->assertEquals(Delimiters::SENTENCE, ".\n\r");
+        $this->assertEquals(".\n\r", Delimiters::SENTENCE);
     }
 
     public function testWordConstant()
     {
-        $this->assertEquals(Delimiters::WORD, " \t.\n\r");
+        $this->assertEquals(" \t.\n\r", Delimiters::WORD);
     }
 
     public function testCharacterConstant()
     {
-        $this->assertEquals(Delimiters::CHARACTER, "");
+        $this->assertEquals("", Delimiters::CHARACTER);
     }
 }

@@ -7,6 +7,8 @@ use cogpowered\FineDiff\Render\Html;
 
 class CallbackTest extends TestCase
 {
+    protected Html $html;
+
     public function setUp(): void
     {
         $this->html = new Html;
@@ -14,28 +16,19 @@ class CallbackTest extends TestCase
 
     public function testCopy()
     {
-        $output = $this->html->callback('c', 'Hello', 0, 5);
-        $this->assertEquals($output, 'Hello');
-
-        $output = $this->html->callback('c', 'He&llo', 0, 100);
-        $this->assertEquals($output, 'He&amp;llo');
+        $this->assertEquals('Hello', $this->html->callback('c', 'Hello', 0, 5));
+        $this->assertEquals('He&amp;llo', $this->html->callback('c', 'He&llo', 0, 100));
     }
 
     public function testDelete()
     {
-        $output = $this->html->callback('d', 'el', 0, 2);
-        $this->assertEquals($output, '<del>el</del>');
-
-        $output = $this->html->callback('d', "e&l", 0, 100);
-        $this->assertEquals($output, '<del>e&amp;l</del>');
+        $this->assertEquals('<del>el</del>', $this->html->callback('d', 'el', 0, 2));
+        $this->assertEquals('<del>e&amp;l</del>', $this->html->callback('d', "e&l", 0, 100));
     }
 
     public function testInsert()
     {
-        $output = $this->html->callback('i', 'monkey', 0, 6);
-        $this->assertEquals($output, '<ins>monkey</ins>');
-
-        $output = $this->html->callback('i', "mon&key", 0, 100);
-        $this->assertEquals($output, '<ins>mon&amp;key</ins>');
+        $this->assertEquals('<ins>monkey</ins>', $this->html->callback('i', 'monkey', 0, 6));
+        $this->assertEquals('<ins>mon&amp;key</ins>', $this->html->callback('i', "mon&key", 0, 100));
     }
 }

@@ -7,6 +7,8 @@ use cogpowered\FineDiff\Render\Text;
 
 class ProcessTest extends TestCase
 {
+    protected Text $text;
+
     public function setUp(): void
     {
         $this->text = new Text;

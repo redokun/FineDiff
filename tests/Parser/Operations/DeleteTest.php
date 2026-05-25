@@ -9,28 +9,27 @@ class DeleteTest extends TestCase
 {
     public function testImplementsOperationInterface()
     {
-        $replace = new Delete(10);
-        $this->assertTrue(is_a($replace, 'cogpowered\FineDiff\Parser\Operations\OperationInterface'));
+        $this->assertInstanceOf(\cogpowered\FineDiff\Parser\Operations\OperationInterface::class, new Delete(10));
     }
 
     public function testGetFromLen()
     {
         $delete = new Delete(10);
-        $this->assertEquals($delete->getFromLen(), 10);
+        $this->assertEquals(10, $delete->getFromLen());
     }
 
     public function testGetToLen()
     {
         $delete = new Delete(342);
-        $this->assertEquals($delete->getToLen(), 0);
+        $this->assertEquals(0, $delete->getToLen());
     }
 
     public function testGetOpcode()
     {
         $delete = new Delete(1);
-        $this->assertEquals($delete->getOpcode(), 'd');
+        $this->assertEquals('d', $delete->getOpcode());
 
         $delete = new Delete(24);
-        $this->assertEquals($delete->getOpcode(), 'd24');
+        $this->assertEquals('d24', $delete->getOpcode());
     }
 }

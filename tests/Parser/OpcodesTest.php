@@ -9,7 +9,7 @@ class OpcodesTest extends TestCase
 {
     public function testInstanceOf()
     {
-        $this->assertTrue(is_a(new Opcodes, 'cogpowered\FineDiff\Parser\OpcodesInterface'));
+        $this->assertInstanceOf(\cogpowered\FineDiff\Parser\OpcodesInterface::class, new Opcodes);
     }
 
     public function testEmptyOpcodes()
@@ -27,7 +27,7 @@ class OpcodesTest extends TestCase
         $opcodes->setOpcodes(array($operation));
 
         $opcodes = $opcodes->getOpcodes();
-        $this->assertEquals($opcodes[0], 'testing');
+        $this->assertEquals('testing', $opcodes[0]);
     }
 
     public function testNotOperation()
@@ -50,9 +50,9 @@ class OpcodesTest extends TestCase
 
         $opcodes = $opcodes->getOpcodes();
 
-        $this->assertTrue(is_array($opcodes));
-        $this->assertEquals($opcodes[0], 'c5i');
-        $this->assertEquals($opcodes[1], '2c6d');
+        $this->assertIsArray($opcodes);
+        $this->assertEquals('c5i', $opcodes[0]);
+        $this->assertEquals('2c6d', $opcodes[1]);
     }
 
     public function testGenerate()
@@ -66,7 +66,7 @@ class OpcodesTest extends TestCase
         $opcodes = new Opcodes;
         $opcodes->setOpcodes(array($operation_one, $operation_two));
 
-        $this->assertEquals($opcodes->generate(), 'c5i2c6d');
+        $this->assertEquals('c5i2c6d', $opcodes->generate());
     }
 
     public function testToString()
@@ -80,7 +80,7 @@ class OpcodesTest extends TestCase
         $opcodes = new Opcodes;
         $opcodes->setOpcodes(array($operation_one, $operation_two));
 
-        $this->assertEquals((string)$opcodes, 'c5i2c6d');
-        $this->assertEquals((string)$opcodes, $opcodes->generate());
+        $this->assertEquals('c5i2c6d', (string)$opcodes);
+        $this->assertEquals($opcodes->generate(), (string)$opcodes);
     }
 }

@@ -8,11 +8,13 @@ use cogpowered\FineDiff\Granularity\Word;
 
 class WordTest extends TestCase
 {
-    protected $delimiters = array(
+    protected Word $character;
+
+    protected array $delimiters = [
         Delimiters::PARAGRAPH,
         Delimiters::SENTENCE,
         Delimiters::WORD,
-    );
+    ];
 
     public function setUp(): void
     {
@@ -21,14 +23,14 @@ class WordTest extends TestCase
 
     public function testExtendsAndImplements()
     {
-        $this->assertTrue(is_a($this->character, 'cogpowered\FineDiff\Granularity\Granularity'));
-        $this->assertTrue(is_a($this->character, 'cogpowered\FineDiff\Granularity\GranularityInterface'));
-        $this->assertTrue(is_a($this->character, 'ArrayAccess'));
-        $this->assertTrue(is_a($this->character, 'Countable'));
+        $this->assertInstanceOf(\cogpowered\FineDiff\Granularity\Granularity::class, $this->character);
+        $this->assertInstanceOf(\cogpowered\FineDiff\Granularity\GranularityInterface::class, $this->character);
+        $this->assertInstanceOf(\ArrayAccess::class, $this->character);
+        $this->assertInstanceOf(\Countable::class, $this->character);
     }
 
     public function testGetDelimiters()
     {
-        $this->assertEquals($this->character->getDelimiters(), $this->delimiters);
+        $this->assertEquals($this->delimiters, $this->character->getDelimiters());
     }
 }

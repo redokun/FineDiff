@@ -7,6 +7,8 @@ use cogpowered\FineDiff\Render\Html;
 
 class ProcessTest extends TestCase
 {
+    protected Html $html;
+
     public function setUp(): void
     {
         $this->html = new Html;

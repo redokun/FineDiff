@@ -8,6 +8,8 @@ use cogpowered\FineDiff\Parser\Parser;
 
 class ParserTest extends TestCase
 {
+    protected Parser $parser;
+
     public function setUp(): void
     {
         $granularity  = new Character;
@@ -16,13 +18,12 @@ class ParserTest extends TestCase
 
     public function testInstanceOf()
     {
-        $this->assertTrue(is_a($this->parser, 'cogpowered\FineDiff\Parser\ParserInterface'));
+        $this->assertInstanceOf(\cogpowered\FineDiff\Parser\ParserInterface::class, $this->parser);
     }
 
     public function testDefaultOpcodes()
     {
-        $opcodes = $this->parser->getOpcodes();
-        $this->assertTrue(is_a($opcodes, 'cogpowered\FineDiff\Parser\OpcodesInterface'));
+        $this->assertInstanceOf(\cogpowered\FineDiff\Parser\OpcodesInterface::class, $this->parser->getOpcodes());
     }
 
     public function testSetOpcodes()
