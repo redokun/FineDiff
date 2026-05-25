@@ -28,7 +28,7 @@ class ParserTest extends TestCase
 
     public function testSetOpcodes()
     {
-        $opcodes = $this->createMock(\cogpowered\FineDiff\Parser\Opcodes::class);
+        $opcodes = $this->createStub(\cogpowered\FineDiff\Parser\Opcodes::class);
         $this->parser->setOpcodes($opcodes);
 
         $this->assertSame($opcodes, $this->parser->getOpcodes());
@@ -37,7 +37,7 @@ class ParserTest extends TestCase
     public function testParseBadGranularity()
     {
         $this->expectException(\cogpowered\FineDiff\Exceptions\GranularityCountException::class);
-        $granularity = $this->createMock(\cogpowered\FineDiff\Granularity\Character::class);
+        $granularity = $this->createStub(\cogpowered\FineDiff\Granularity\Character::class);
         $granularity->method('count')->willReturn(0);
         $parser = new Parser($granularity);
 

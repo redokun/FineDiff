@@ -9,7 +9,7 @@ class DependencyInjectTest extends TestCase
 {
     public function testGetGranularity()
     {
-        $character = $this->createMock(\cogpowered\FineDiff\Granularity\Character::class);
+        $character = $this->createStub(\cogpowered\FineDiff\Granularity\Character::class);
 
         $diff = new Diff($character);
 
@@ -18,7 +18,7 @@ class DependencyInjectTest extends TestCase
 
     public function testGetRenderer()
     {
-        $html = $this->createMock(\cogpowered\FineDiff\Render\Html::class);
+        $html = $this->createStub(\cogpowered\FineDiff\Render\Html::class);
 
         $diff = new Diff(null, $html);
 
@@ -27,10 +27,10 @@ class DependencyInjectTest extends TestCase
 
     public function testRender()
     {
-        $opcodes = $this->createMock(\cogpowered\FineDiff\Parser\Opcodes::class);
+        $opcodes = $this->createStub(\cogpowered\FineDiff\Parser\Opcodes::class);
         $opcodes->method('generate')->willReturn('c12');
 
-        $parser = $this->createMock(\cogpowered\FineDiff\Parser\Parser::class);
+        $parser = $this->createStub(\cogpowered\FineDiff\Parser\Parser::class);
         $parser->method('parse')->willReturn($opcodes);
 
         $html = $this->createMock(\cogpowered\FineDiff\Render\Html::class);
@@ -42,9 +42,7 @@ class DependencyInjectTest extends TestCase
 
     public function testGetParser()
     {
-        $parser = $this->getMockBuilder(\cogpowered\FineDiff\Parser\Parser::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $parser = $this->createStub(\cogpowered\FineDiff\Parser\Parser::class);
 
         $diff = new Diff(null, null, $parser);
 

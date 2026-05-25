@@ -39,10 +39,10 @@ class OpcodesTest extends TestCase
 
     public function testGetOpcodes()
     {
-        $operation_one = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_one = $this->createStub(\cogpowered\FineDiff\Parser\Operations\Copy::class);
         $operation_one->method('getOpcode')->willReturn('c5i');
 
-        $operation_two = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_two = $this->createStub(\cogpowered\FineDiff\Parser\Operations\Copy::class);
         $operation_two->method('getOpcode')->willReturn('2c6d');
 
         $opcodes = new Opcodes;
@@ -57,10 +57,10 @@ class OpcodesTest extends TestCase
 
     public function testGenerate()
     {
-        $operation_one = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_one = $this->createStub(\cogpowered\FineDiff\Parser\Operations\Copy::class);
         $operation_one->method('getOpcode')->willReturn('c5i');
 
-        $operation_two = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_two = $this->createStub(\cogpowered\FineDiff\Parser\Operations\Copy::class);
         $operation_two->method('getOpcode')->willReturn('2c6d');
 
         $opcodes = new Opcodes;
@@ -71,10 +71,10 @@ class OpcodesTest extends TestCase
 
     public function testToString()
     {
-        $operation_one = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_one = $this->createStub(\cogpowered\FineDiff\Parser\Operations\Copy::class);
         $operation_one->method('getOpcode')->willReturn('c5i');
 
-        $operation_two = $this->createMock(\cogpowered\FineDiff\Parser\Operations\Copy::class);
+        $operation_two = $this->createStub(\cogpowered\FineDiff\Parser\Operations\Copy::class);
         $operation_two->method('getOpcode')->willReturn('2c6d');
 
         $opcodes = new Opcodes;

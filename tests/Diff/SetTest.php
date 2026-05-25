@@ -18,9 +18,7 @@ class SetTest extends TestCase
     {
         $this->assertFalse(method_exists($this->diff->getParser(), 'fooBar'));
 
-        $parser = $this->getMockBuilder(\cogpowered\FineDiff\Parser\Parser::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $parser = $this->createStub(\cogpowered\FineDiff\Parser\Parser::class);
 
         $this->diff->setParser($parser);
 
@@ -31,7 +29,7 @@ class SetTest extends TestCase
     {
         $this->assertFalse(method_exists($this->diff->getRenderer(), 'fooBar'));
 
-        $html = $this->createMock(\cogpowered\FineDiff\Render\Html::class);
+        $html = $this->createStub(\cogpowered\FineDiff\Render\Html::class);
 
         $this->diff->setRenderer($html);
 
@@ -42,7 +40,7 @@ class SetTest extends TestCase
     {
         $this->assertFalse(method_exists($this->diff->getGranularity(), 'fooBar'));
 
-        $granularity = $this->createMock(\cogpowered\FineDiff\Granularity\Word::class);
+        $granularity = $this->createStub(\cogpowered\FineDiff\Granularity\Word::class);
 
         $parser = $this->getMockBuilder(\cogpowered\FineDiff\Parser\Parser::class)
             ->disableOriginalConstructor()
