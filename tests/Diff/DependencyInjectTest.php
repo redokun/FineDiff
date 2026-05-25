@@ -2,13 +2,13 @@
 
 namespace FineDiffTests\Diff;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Mockery as m;
 use cogpowered\FineDiff\Diff;
 
-class DependencyInjectTest extends PHPUnit_Framework_TestCase
+class DependencyInjectTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
@@ -21,6 +21,7 @@ class DependencyInjectTest extends PHPUnit_Framework_TestCase
         $diff = new Diff($character);
         $granularity = $diff->getGranularity();
 
+        $this->assertSame($character, $granularity);
         $granularity->justTesting();
     }
 
@@ -32,6 +33,7 @@ class DependencyInjectTest extends PHPUnit_Framework_TestCase
         $diff = new Diff(null, $html);
         $renderer = $diff->getRenderer();
 
+        $this->assertSame($html, $renderer);
         $renderer->justTesting();
     }
 
@@ -49,6 +51,7 @@ class DependencyInjectTest extends PHPUnit_Framework_TestCase
 
         $diff = new Diff(null, $html, $parser);
         $diff->render('hello', 'hello2');
+        $this->addToAssertionCount(1);
     }
 
     public function testGetParser()
@@ -59,6 +62,7 @@ class DependencyInjectTest extends PHPUnit_Framework_TestCase
         $diff = new Diff(null, null, $parser);
         $parser = $diff->getParser();
 
+        $this->addToAssertionCount(1);
         $parser->justTesting();
     }
 
@@ -69,5 +73,6 @@ class DependencyInjectTest extends PHPUnit_Framework_TestCase
 
         $diff = new Diff(null, null, $parser);
         $diff->getOpcodes('foobar', 'eggfooba');
+        $this->addToAssertionCount(1);
     }
 }

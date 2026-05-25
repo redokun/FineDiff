@@ -2,11 +2,11 @@
 
 namespace FineDiffTests\Granularity;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use cogpowered\FineDiff\Delimiters;
 use cogpowered\FineDiff\Granularity\Character;
 
-class CharacterTest extends PHPUnit_Framework_TestCase
+class CharacterTest extends TestCase
 {
     protected $delimiters = array(
         Delimiters::PARAGRAPH,
@@ -15,7 +15,7 @@ class CharacterTest extends PHPUnit_Framework_TestCase
         Delimiters::CHARACTER,
     );
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->character = new Character;
     }

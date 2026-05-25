@@ -2,11 +2,11 @@
 
 namespace FineDiffTests\Granularity;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use cogpowered\FineDiff\Delimiters;
 use cogpowered\FineDiff\Granularity\Word;
 
-class WordTest extends PHPUnit_Framework_TestCase
+class WordTest extends TestCase
 {
     protected $delimiters = array(
         Delimiters::PARAGRAPH,
@@ -14,7 +14,7 @@ class WordTest extends PHPUnit_Framework_TestCase
         Delimiters::WORD,
     );
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->character = new Word;
     }

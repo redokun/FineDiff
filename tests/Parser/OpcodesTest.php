@@ -2,13 +2,13 @@
 
 namespace FineDiffTests\Parser;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Mockery as m;
 use cogpowered\FineDiff\Parser\Opcodes;
 
-class OpcodesTest extends PHPUnit_Framework_TestCase
+class OpcodesTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
@@ -36,11 +36,9 @@ class OpcodesTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($opcodes[0], 'testing');
     }
 
-    /**
-     * @expectedException cogpowered\FineDiff\Exceptions\OperationException
-     */
     public function testNotOperation()
     {
+        $this->expectException(\cogpowered\FineDiff\Exceptions\OperationException::class);
         $opcodes = new Opcodes;
         $opcodes->setOpcodes(array('test'));
     }

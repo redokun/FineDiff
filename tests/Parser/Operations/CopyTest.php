@@ -2,10 +2,10 @@
 
 namespace FineDiffTests\Parser\Operations;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use cogpowered\FineDiff\Parser\Operations\Copy;
 
-class CopyTest extends PHPUnit_Framework_TestCase
+class CopyTest extends TestCase
 {
     public function testImplementsOperationInterface()
     {

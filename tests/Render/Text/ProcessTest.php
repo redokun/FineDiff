@@ -2,27 +2,25 @@
 
 namespace FineDiffTests\Render\Text;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Mockery as m;
 use cogpowered\FineDiff\Render\Text;
 
-class ProcessTest extends PHPUnit_Framework_TestCase
+class ProcessTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->text = new Text;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testInvalidOpcode()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->text->process('Hello worlds', 123);
     }
 

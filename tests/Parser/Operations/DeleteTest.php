@@ -2,10 +2,10 @@
 
 namespace FineDiffTests\Parser\Operations;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use cogpowered\FineDiff\Parser\Operations\Delete;
 
-class DeleteTest extends PHPUnit_Framework_TestCase
+class DeleteTest extends TestCase
 {
     public function testImplementsOperationInterface()
     {

@@ -2,20 +2,20 @@
 
 namespace FineDiffTests\Parser;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Mockery as m;
 use cogpowered\FineDiff\Granularity\Character;
 use cogpowered\FineDiff\Parser\Parser;
 
-class ParserTest extends PHPUnit_Framework_TestCase
+class ParserTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $granularity  = new Character;
         $this->parser = new Parser($granularity);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
@@ -41,11 +41,9 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($opcodes->foo(), 'bar');
     }
 
-    /**
-     * @expectedException cogpowered\FineDiff\Exceptions\GranularityCountException
-     */
     public function testParseBadGranularity()
     {
+        $this->expectException(\cogpowered\FineDiff\Exceptions\GranularityCountException::class);
         $granularity = m::mock('cogpowered\FineDiff\Granularity\Character');
         $granularity->shouldReceive('count')->andReturn(0);
         $parser = new Parser($granularity);
@@ -60,5 +58,6 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $this->parser->setOpcodes($opcodes);
 
         $this->parser->parse('Hello worlds', 'Hello2 world');
+        $this->addToAssertionCount(1);
     }
 }

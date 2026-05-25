@@ -2,18 +2,18 @@
 
 namespace FineDiffTests\Render\Html;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Mockery as m;
 use cogpowered\FineDiff\Render\Html;
 
-class ProcessTest extends PHPUnit_Framework_TestCase
+class ProcessTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->html = new Html;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }

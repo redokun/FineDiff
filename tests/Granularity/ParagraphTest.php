@@ -2,17 +2,17 @@
 
 namespace FineDiffTests\Granularity;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use cogpowered\FineDiff\Delimiters;
 use cogpowered\FineDiff\Granularity\Paragraph;
 
-class ParagraphTest extends PHPUnit_Framework_TestCase
+class ParagraphTest extends TestCase
 {
     protected $delimiters = array(
         Delimiters::PARAGRAPH,
     );
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->character = new Paragraph;
     }

@@ -2,10 +2,10 @@
 
 namespace FineDiffTests\Parser\Operations;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use cogpowered\FineDiff\Parser\Operations\Insert;
 
-class InsertTest extends PHPUnit_Framework_TestCase
+class InsertTest extends TestCase
 {
     public function testImplementsOperationInterface()
     {

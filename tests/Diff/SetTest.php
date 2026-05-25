@@ -2,18 +2,18 @@
 
 namespace FineDiffTests\Diff;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Mockery as m;
 use cogpowered\FineDiff\Diff;
 
-class SetTest extends PHPUnit_Framework_TestCase
+class SetTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->diff = new Diff;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
