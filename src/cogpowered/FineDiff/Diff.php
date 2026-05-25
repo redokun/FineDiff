@@ -55,7 +55,7 @@ class Diff
      * @throws cogpowered\FineDiff\Exceptions\GranularityCountException
      * @throws cogpowered\FineDiff\Exceptions\OperationException
      */
-    public function __construct(GranularityInterface $granularity = null, RendererInterface $renderer = null, ParserInterface $parser = null)
+    public function __construct(?GranularityInterface $granularity = null, ?RendererInterface $renderer = null, ?ParserInterface $parser = null)
     {
         // Set some sensible defaults
 
